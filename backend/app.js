@@ -2,6 +2,7 @@ const express = require("express");
 const path = require("path");
 const mongoose = require("mongoose");
 const port = process.env.PORT || 3000;
+const session = require('express-session');
 const cors = require("cors");
 const jwt = require("jsonwebtoken");
 const authorRoutes = require("./routes/authorRoutes");
@@ -18,8 +19,7 @@ mongoose.connect(
     useFindAndModify: false,
   }
 );
-
-//===================== connecting our database
+//*************************** connecting our database ****************************
 const db = mongoose.connection;
 db.on("error", console.error.bind(console,"connection error:"));
 db.once("open", ()=> {
@@ -29,7 +29,18 @@ db.once("open", ()=> {
 app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-
+const sessionConfig = {
+  secret:"thisisverysecret",
+  resave: false,
+  saveUninitialized: true,
+  cookie: {
+      httpOnly: false,
+      cookie:{secure:false},
+      expires: Date.now() + 1000 * 60 * 60 * 24 * 7,
+      maxAge: 1000 * 60 * 60 * 24 * 7
+  }
+}
+app.use(session(sessionConfig));
 app.use("/", userRoutes);
 app.use("/authors", authorRoutes);
 app.use("/books", bookRoutes);

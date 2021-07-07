@@ -37,6 +37,8 @@ export class ShowComponent implements OnInit {
       }
     }
 
+   
+
 
 
   ngOnInit(): void {

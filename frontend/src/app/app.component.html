@@ -14,6 +14,8 @@
             </div>
             <div class="navbar-nav ml-auto">
                 <a class="nav-link"  routerLink="/login" *ngIf="!_auth.loggedIn()" routerLinkActive="active">Login</a>
+                <a class="nav-link"  routerLink="/register" *ngIf="!_auth.loggedIn()" routerLinkActive="active">register</a>
+
                 <a class="nav-link" style="cursor:pointer" *ngIf="_auth.loggedIn()" (click)="logoutUser()">Logout</a>
             </div>
         </div>

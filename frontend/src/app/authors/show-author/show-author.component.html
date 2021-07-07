@@ -15,9 +15,9 @@
                     </li>
                 </ul> 
                  <div class="card-body" *ngIf="showDeleteButton" >
-                    <a class="card-link btn btn-info" routerLink="/authors/{{authors._id}}/edit">Edit</a>
+                    <a class="card-link btn btn-info" *ngIf=" _auth.loggedIn() && _auth.getUser()=='admin' " routerLink="/authors/{{authors._id}}/edit">Edit</a>
                     <div class="d-inline">
-                        <button type="submit" (click)="deleteAuthor()" class="btn btn-danger" >Delete</button>
+                        <button type="submit" *ngIf=" _auth.loggedIn() && _auth.getUser()=='admin' " (click)="deleteAuthor()" class="btn btn-danger" >Delete</button>
                     </div>
                 </div>
             

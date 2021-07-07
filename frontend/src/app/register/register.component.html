@@ -1,0 +1,38 @@
+<div class="py-5">
+  <div class="row">
+    <div class="col-md-6 mx-auto">
+      <span class="anchor" id="formLogin"></span>
+      <!-- form card login -->
+      <div class="card rounded-0">
+        <div class="card-header">
+          <h3 class="mb-0">register</h3>
+        </div>
+        <div class="card-body">
+          <!-- we gives the name used in the ts file here to connect with html -->
+          <form [formGroup]="registerForm" (ngSubmit)="registerUser()">
+            <div>
+              <label>username</label>
+              <input type="text" formControlName="username" />
+            </div>
+            <div>
+              <label>email</label>
+              <!-- we gives formControlName the exact we used in ts file -->
+              <input type="text" formControlName="email" />
+            </div>
+            <div>
+              <label>Password</label>
+              <input type="password" formControlName="password" />
+            </div>
+            <button
+              [disabled]="registerForm.invalid"
+              type="submit"
+              class="btn btn-success float-right"
+            >
+              register
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

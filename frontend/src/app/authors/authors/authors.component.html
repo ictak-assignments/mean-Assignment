@@ -24,7 +24,7 @@
         </div>
     </div>
     <div *ngIf="showAddButton">
-        <button class="btn btn-sm btn-success text-center"><a routerLink="/authors/new">Add A Author`s Info</a></button>
+        <button *ngIf=" _auth.loggedIn() && _auth.getUser()=='admin' " class="btn btn-sm btn-success text-center"><a routerLink="/authors/new">Add A Author`s Info</a></button>
     </div>
 </main>
 

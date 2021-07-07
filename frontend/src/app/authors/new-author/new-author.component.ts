@@ -1,3 +1,4 @@
+import { AuthService } from 'src/app/auth.service';
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
@@ -12,7 +13,7 @@ import { authorModel2 } from '../authors/authorModel';
 export class NewAuthorComponent implements OnInit {
   author = new authorModel2("","","","");
 
-  constructor(private router:Router,private http:HttpClient) { }
+  constructor(public _auth:AuthService,private router:Router,private http:HttpClient) { }
   newAuthor(item)
    {
      return this.http.post("http://localhost:3000/authors",{"author":item})

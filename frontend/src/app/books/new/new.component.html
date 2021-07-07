@@ -1,7 +1,7 @@
 <div class="container mt-5">
     <div class="row">
         <h1 class="text-center">New Book</h1>
-        <div class="col-6 offset-3">
+        <div class="col-6 offset-3" *ngIf=" _auth.loggedIn() && _auth.getUser()=='admin' ">
             <!-- <form action="/books" method="POST"> -->
             <form #form="ngForm" (ngSubmit)="AddBook()">
                 <div class="mb-3">

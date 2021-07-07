@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { CanActivate,Router} from '@angular/router';
 import {AuthService} from './auth.service';
+import Swal from 'sweetalert2';
 
 @Injectable({
   providedIn: 'root'
@@ -8,12 +9,17 @@ import {AuthService} from './auth.service';
 export class AuthGuard implements CanActivate {
   constructor(private _auth:AuthService,private _router:Router){  }
   canActivate():boolean{
-    if (this._auth.loggedIn()){
+    if (this._auth.loggedIn() && this._auth.getUser() == 'user'){
       console.log('true')
+      Swal.fire('Are You Sure').then(() => {
+      });
+    
       return true
     }
     else {
-      this._router.navigate(['/login'])
+      Swal.fire('you have no admin privilage').then(() => {
+        this._router.navigate(['/login']);
+      });
       return false
     }
   }

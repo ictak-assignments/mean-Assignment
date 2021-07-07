@@ -15,4 +15,8 @@ export class AuthService {
     getToken() {
       return localStorage.getItem('token')
     }
+    getUser()
+    {
+      return localStorage.getItem('role')
+    }
 }
