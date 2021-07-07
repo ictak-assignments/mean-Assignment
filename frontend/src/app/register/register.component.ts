@@ -16,6 +16,8 @@ export class RegisterComponent implements OnInit {
     private http: HttpClient
   ) {}
   private Url = 'http://localhost:3000/register';
+  passwordReg = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{8,}$/;
+
 
   ngOnInit(): void {}
   user = {
@@ -32,7 +34,7 @@ export class RegisterComponent implements OnInit {
         Validators.required,
       ],
     ],
-    password: ['', [Validators.minLength(6), Validators.required]],
+    password: ['', [Validators.minLength(6),Validators.pattern(this.passwordReg), Validators.required]],
   });
 
   newUser(item: any) {
