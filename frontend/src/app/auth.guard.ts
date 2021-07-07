@@ -9,7 +9,7 @@ import Swal from 'sweetalert2';
 export class AuthGuard implements CanActivate {
   constructor(private _auth:AuthService,private _router:Router){  }
   canActivate():boolean{
-    if (this._auth.loggedIn() && this._auth.getUser() == 'user'){
+    if (this._auth.loggedIn() && this._auth.getUser() == 'admin'){
       console.log('true')
       Swal.fire('Are You Sure').then(() => {
       });
