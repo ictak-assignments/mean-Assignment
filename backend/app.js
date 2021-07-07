@@ -7,24 +7,24 @@ const jwt = require("jsonwebtoken");
 const authorRoutes = require("./routes/authorRoutes");
 const userRoutes = require("./routes/userRoutes");
 const bookRoutes = require("./routes/bookRoutes");
-
-
-//===================== connecting our database
-mongoose.connect("mongodb://localhost:27017/bookself-old", {
-  useNewUrlParser: true,
-  useCreateIndex: true,
-  useUnifiedTopology: true,
-  useFindAndModify: false,
-});
-const db = mongoose.connection;
-db.on("error", console.error.bind(console, "connection error:"));
-db.once("open", () => {
-  console.log("Database connected");
-});
-
-//======================== creating our application
 const app = express();
 
+mongoose.connect(
+  "mongodb+srv://userone:sinu1@ictakfiles.g1s0x.mongodb.net/ictAng1?retryWrites=true&w=majority",
+  {
+    useNewUrlParser: true,
+    useCreateIndex: true,
+    useUnifiedTopology: true,
+    useFindAndModify: false,
+  }
+);
+
+//===================== connecting our database
+const db = mongoose.connection;
+db.on("error", console.error.bind(console,"connection error:"));
+db.once("open", ()=> {
+	console.log("database connected")
+})
 
 app.use(cors());
 app.use(express.json());
