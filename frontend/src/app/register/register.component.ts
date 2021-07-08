@@ -16,16 +16,10 @@ export class RegisterComponent implements OnInit {
     private http: HttpClient
   ) {}
   private Url = 'http://localhost:3000/register';
-  passwordReg = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{8,}$/;
-
+  passwordReg =
+    /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{8,}$/;
 
   ngOnInit(): void {}
-  user = {
-    username: '',
-    email: '',
-    password: '',
-  };
-
   registerForm = this.fb.group({
     email: [
       '',
@@ -34,26 +28,30 @@ export class RegisterComponent implements OnInit {
         Validators.required,
       ],
     ],
-    password: ['', [Validators.minLength(6),Validators.pattern(this.passwordReg), Validators.required]],
+    password: [
+      '',
+      [
+        Validators.minLength(6),
+        Validators.pattern(this.passwordReg),
+        Validators.required,
+      ],
+    ],
   });
 
   newUser(item: any) {
-    return this.http.post(this.Url, { "user": item });
+    return this.http.post(this.Url, { user: item });
   }
 
   registerUser() {
     this.newUser(this.registerForm.value).subscribe((response) => {
       if (response) {
-        Swal.fire('Successfully Added', '', 'success').then(() => {
-          this.router.navigate(['/']);
+        Swal.fire('successfully registered').then(() => {
+          this.router.navigate(['/login']);
         });
       } else {
-        console.log('Network Error');
-        Swal.fire('Network Error', 'Please do after sometime ', 'error').then(
-          () => {
-            this.router.navigate(['/register']);
-          }
-        );
+        Swal.fire('something went wrong').then(() => {
+          this.router.navigate(['/register']);
+        });
       }
     });
   }

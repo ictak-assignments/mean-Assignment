@@ -17,6 +17,7 @@ export class AuthGuard implements CanActivate {
       return true
     }
     else {
+      localStorage.removeItem('token')
       Swal.fire('you have no admin privilage').then(() => {
         this._router.navigate(['/login']);
       });
