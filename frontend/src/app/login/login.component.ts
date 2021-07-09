@@ -15,20 +15,42 @@ export class LoginComponent implements OnInit {
 
   ngOnInit() {}
 
+  // loginUser() {
+  //   this._auth.loginUser(this.user).subscribe(
+  //     (res) => {
+  //       localStorage.setItem('token', res.token);
+  //       localStorage.setItem('role', res.role);
+  //       Swal.fire('successfully logined').then(() => {
+  //         this._router.navigate(['/home']);
+  //       });
+  //     },
+  //     (err) => {
+  //       Swal.fire('Authentication failed').then(() => {
+  //         this._router.navigate(['/login']);
+  //       });
+  //     }
+  //   );
+  // }
   loginUser() {
-    this._auth.loginUser(this.user).subscribe(
-      (res) => {
-        localStorage.setItem('token', res.token);
-        localStorage.setItem('role', res.role);
-        Swal.fire('successfully logined').then(() => {
-          this._router.navigate(['/home']);
-        });
-      },
-      (err) => {
-        Swal.fire('Authentication failed').then(() => {
-          this._router.navigate(['/login']);
-        });
+    this._auth.loginUser(this.user)
+      .subscribe(
+        response => {
+          if (response.status) {
+            localStorage.setItem('token', response.token)
+            console.log(response.token)
+            localStorage.setItem('role', response.role)
+            this._router.navigate(['/books']);
+          } else {
+            Swal.fire(
+              'Warning!!',
+              'User not found!',
+              'error')
+              .then (
+                refresh =>{
+                  window.location.reload();
+              }) 
+          }
+        })
+
       }
-    );
-  }
 }
